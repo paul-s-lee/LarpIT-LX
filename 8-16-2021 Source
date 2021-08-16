@@ -1,0 +1,483 @@
+using System;
+using System.IO;
+using System.Drawing;
+using System.Diagnostics;
+using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace LarpIT_LX
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+            UpdateColorTheme();
+        }
+
+        // Clipboard.SetText(Badge, Location, Contact, Asset Tag, Main Issue, Work Notes)
+        public void BadgeTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (String.IsNullOrEmpty(BadgeTextBox.Text) == true)
+            {
+                ;
+            }
+            else
+            {
+                Clipboard.SetText(BadgeTextBox.Text);
+            }
+        }
+        public void LocationTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (String.IsNullOrEmpty(LocationTextBox.Text) == true)
+            {
+                ;
+            }
+            else
+            {
+                Clipboard.SetText(LocationTextBox.Text);
+            }
+        }
+        public void ContactTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (String.IsNullOrEmpty(ContactTextBox.Text) == true)
+            {
+                ;
+            }
+            else
+            {
+                Clipboard.SetText(ContactTextBox.Text);
+            }
+        }
+        public void AssetTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (String.IsNullOrEmpty(AssetTextBox.Text) == true)
+            {
+                ;
+            }
+            else
+            {
+                Clipboard.SetText(AssetTextBox.Text);
+            }
+        }
+        public void MainIssueTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (String.IsNullOrEmpty(MainIssueTextBox.Text) == true)
+            {
+                ;
+            }
+            else
+            {
+                Clipboard.SetText(MainIssueTextBox.Text);
+            }
+        }
+
+        // Clipboard.SetText(Work Notes Converted to Single Lines)
+        public void RichTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            string NotesConverted = Regex.Replace(RichTextBox.Text, @"(\s)\s+", "$1" + "$1");
+            Clipboard.SetText(NotesConverted);
+        }
+
+        // Clipboard.SetText(ALL LARPIT DATA)
+        public void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            // CTRL + X
+            if (e.Control && e.KeyCode == Keys.X)
+            {
+                if (VerifyCheckBox.Checked == true && LocalSupportCheckBox.Checked == true)
+                {
+                    if (String.IsNullOrEmpty(BadgeTextBox.Text) == true)
+                    {
+                        BadgeTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(LocationTextBox.Text) == true)
+                    {
+                        LocationTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(ContactTextBox.Text) == true)
+                    {
+                        ContactTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(AssetTextBox.Text) == true)
+                    {
+                        AssetTextBox.Text = "None";
+                    }
+                    Clipboard.SetText("Badge/Cws ID: " + BadgeTextBox.Text + "\n\n" +
+                                      "Location: " + LocationTextBox.Text + "\n\n" +
+                                      "Contact: " + ContactTextBox.Text + "\n\n" +
+                                      "Asset: " + AssetTextBox.Text + "\n\n" +
+                                      "Main Issue: " + MainIssueTextBox.Text + "\n\n" +
+                                      "Verified: Yes" + "\n\n" +
+                                      "Local Support: Yes");
+                }
+                else if (VerifyCheckBox.Checked == false && LocalSupportCheckBox.Checked == false)
+                {
+                    if (String.IsNullOrEmpty(BadgeTextBox.Text) == true)
+                    {
+                        BadgeTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(LocationTextBox.Text) == true)
+                    {
+                        LocationTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(ContactTextBox.Text) == true)
+                    {
+                        ContactTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(AssetTextBox.Text) == true)
+                    {
+                        AssetTextBox.Text = "None";
+                    }
+                    Clipboard.SetText("Badge/Cws ID: " + BadgeTextBox.Text + "\n\n" +
+                                      "Location: " + LocationTextBox.Text + "\n\n" +
+                                      "Contact: " + ContactTextBox.Text + "\n\n" +
+                                      "Asset: " + AssetTextBox.Text + "\n\n" +
+                                      "Main Issue: " + MainIssueTextBox.Text + "\n\n" +
+                                      "Verified: No" + "\n\n" +
+                                      "Local Support: No");
+                }
+                else if (VerifyCheckBox.Checked == true && LocalSupportCheckBox.Checked == false)
+                {
+                    if (String.IsNullOrEmpty(BadgeTextBox.Text) == true)
+                    {
+                        BadgeTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(LocationTextBox.Text) == true)
+                    {
+                        LocationTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(ContactTextBox.Text) == true)
+                    {
+                        ContactTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(AssetTextBox.Text) == true)
+                    {
+                        AssetTextBox.Text = "None";
+                    }
+                    Clipboard.SetText("Badge/Cws ID: " + BadgeTextBox.Text + "\n\n" +
+                                      "Location: " + LocationTextBox.Text + "\n\n" +
+                                      "Contact: " + ContactTextBox.Text + "\n\n" +
+                                      "Asset: " + AssetTextBox.Text + "\n\n" +
+                                      "Main Issue: " + MainIssueTextBox.Text + "\n\n" +
+                                      "Verified: Yes" + "\n\n" +
+                                      "Local Support: No");
+                }
+                else if (VerifyCheckBox.Checked == false && LocalSupportCheckBox.Checked == true)
+                {
+                    if (String.IsNullOrEmpty(BadgeTextBox.Text) == true)
+                    {
+                        BadgeTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(LocationTextBox.Text) == true)
+                    {
+                        LocationTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(ContactTextBox.Text) == true)
+                    {
+                        ContactTextBox.Text = "None";
+                    }
+                    if (String.IsNullOrEmpty(AssetTextBox.Text) == true)
+                    {
+                        AssetTextBox.Text = "None";
+                    }
+                    Clipboard.SetText("Badge/Cws ID: " + BadgeTextBox.Text + "\n\n" +
+                                      "Location: " + LocationTextBox.Text + "\n\n" +
+                                      "Contact: " + ContactTextBox.Text + "\n\n" +
+                                      "Asset: " + AssetTextBox.Text + "\n\n" +
+                                      "Main Issue: " + MainIssueTextBox.Text + "\n\n" +
+                                      "Verified: No" + "\n\n" +
+                                      "Local Support: Yes");
+                }
+            }
+            else if (e.Control && e.KeyCode == Keys.Q)
+            {
+                AfkLabel.Text = "AFK = ON";
+                AfkLabel.ForeColor = Color.LimeGreen;
+                StopSleep.Start();
+            }
+            else if (e.Control && e.KeyCode == Keys.W)
+            {
+                AfkLabel.Text = "AFK = OFF";
+                AfkLabel.ForeColor = Color.Red;
+                StopSleep.Stop();
+            }
+
+            // DEL function currently under construction
+            else if (e.KeyCode == Keys.Delete)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to clear the LarpIT data?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    using (StreamWriter Writer = new StreamWriter("history.txt", true))
+                    {
+                        DateTime local = DateTime.Now;
+                        Writer.WriteLine(local.ToString());
+                        Writer.WriteLine(BadgeTextBox.Text);
+                        Writer.WriteLine(LocationTextBox.Text);
+                        Writer.WriteLine(ContactTextBox.Text);
+                        Writer.WriteLine(AssetTextBox.Text);
+                        Writer.WriteLine(MainIssueTextBox.Text);
+                        Writer.WriteLine("----------------------------------------------------------------------------------");
+                    }
+                    BadgeTextBox.Clear();
+                    LocationTextBox.Clear();
+                    ContactTextBox.Clear();
+                    AssetTextBox.Clear();
+                    MainIssueTextBox.Clear();
+                    RichTextBox.Clear();
+                    VerifyCheckBox.Checked = false;
+                    LocalSupportCheckBox.Checked = false;
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    ;
+                }
+            }
+            else if (e.Control && e.KeyCode == Keys.F)
+            {
+                Clipboard.SetText("Hello XXXXXXXXXX,\n\nThis is Paul from the Solar Service Desk.\n\nIf you still need assistance XXXXXXXXXX, please contact the solar service desk.\n\nTicket XXXXXXXXXX has been created and placed on hold.\n\nBest Regards,\n\nPaul Lee - SDA\nTel: 619-595-7500");
+                MessageBox.Show("Copied to clipboard!", "Success");
+            }
+            else if (e.Control && e.KeyCode == Keys.R)
+            {
+                Clipboard.SetText("Hello XXXXXXXXXX,\n\nThis is Paul from the Solar Service Desk.\n\nTicket XXXXXXXXXX will be closed for now.\n\nIf you still need assistance with XXXXXXXXXX, please contact Solar IT at 619-595-7500 and a new ticket will be created.\n\nBest regards,\n\nPaul Lee - SDA\nTel: 619-595-7500");
+                MessageBox.Show("Copied to clipboard!", "Success!");
+            }
+        }
+
+        // Dark Theme Tool
+        public void DarkTool_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(45, 45, 48);
+            VerifyCheckBox.ForeColor = Color.White;
+            LocalSupportCheckBox.ForeColor = Color.White;
+            using (StreamWriter W = new StreamWriter("color.ini", false))
+            {
+                W.Write("d");
+            }
+        }
+
+        // White Theme Tool
+        public void DefaultTool_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(255, 255, 255);
+            using (StreamWriter W = new StreamWriter("color.ini", false))
+            {
+                W.Write("w");
+            }
+            VerifyCheckBox.ForeColor = Color.Red;
+            LocalSupportCheckBox.ForeColor = Color.Red;
+        }
+        // Load Color Theme
+        public void UpdateColorTheme()
+        {
+            try
+            {
+                using (StreamReader R = new StreamReader("color.ini"))
+                {
+                    string theme = R.ReadToEnd();
+                    if (theme == "d")
+                    {
+                        VerifyCheckBox.ForeColor = Color.White;
+                        LocalSupportCheckBox.ForeColor = Color.White;
+                        this.BackColor = Color.FromArgb(45, 45, 48);
+                    }
+                    else if (theme == "w")
+                    {
+                        this.BackColor = Color.FromArgb(255, 255, 255);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ;
+            }
+        }
+
+        // Citrix Tool
+        public void CitrixTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Clipboard.SetText("\\\\t3pnas2\\UPMProfiles\\XAProfiles\\" + CitrixTextBox.Text);
+                CitrixTextBox.Clear();
+                MessageBox.Show("Copied to clipboard", "Success!");
+            }
+        }
+
+        // Auto Detect Local Support in the Background
+        public void AutoDetectLocalSupport_Tick(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(LocationTextBox.Text) == true)
+            {
+                ;
+            }
+            else
+            {
+                string location = LocationTextBox.Text.ToLower();
+                if (location.Contains("km") || location.Contains("kearny mesa") || location.Contains("kearnymesa") || location.Contains("sp") || location.Contains("skypark") || location.Contains("sky park")
+                    || location.Contains("hd") || location.Contains("harbor drive") || location.Contains("harbordrive")
+                    || location.Contains("desoto") || location.Contains("mabank") || location.Contains("houston") || location.Contains("channel") || location.Contains("channelview") || location.Contains("channel view")
+                    || location.Contains("gardena"))
+                {
+                    LocalSupportCheckBox.Checked = true;
+                }
+
+            }
+        }
+
+        // Service Now Data Extractor
+        public void RichTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            List<string> stringList = new List<string>();
+            string empty = string.Empty;
+            string str1 = string.Empty;
+            string str2 = string.Empty;
+            string str3 = string.Empty;
+            if (!e.Control || e.KeyCode != Keys.S)
+                return;
+            using (StreamWriter streamWriter = new StreamWriter("interface.txt", false))
+                streamWriter.Write(this.RichTextBox.Text);
+            using (StreamReader streamReader = new StreamReader("interface.txt"))
+            {
+                string str4;
+                while ((str4 = streamReader.ReadLine()) != null)
+                    stringList.Add(str4);
+            }
+            for (int index1 = 0; index1 < stringList.Count; ++index1)
+            {
+                if (stringList[index1] == "CWS ID")
+                    str1 = !(stringList[index1 + 1] != "PeopleSoft ID") ? "null" : stringList[index1 + 1];
+                else if (stringList[index1] == "Work Location Description")
+                    str3 = !(stringList[index1 + 1] != "Work Location Code") ? "null" : stringList[index1 + 1];
+                else if (stringList[index1] == "Business phone")
+                {
+                    if (stringList[index1 + 1] != "Mobile phone")
+                        str2 = stringList[index1 + 1];
+                    else if (stringList[index1 + 2] != "Home phone")
+                        str2 = stringList[index1 + 2];
+                    else if (stringList[index1 + 3] != "On-Call phone 1")
+                    {
+                        str2 = stringList[index1 + 3];
+                    }
+                    else
+                    {
+                        for (int index2 = 0; index2 < stringList.Count; ++index2)
+                        {
+                            if (stringList[index2] == "Email")
+                                str2 = !(stringList[index2 + 1] != "Manager") ? "No work/personal phone or email" : stringList[index2 + 1];
+                        }
+                    }
+                }
+            }
+            int num = (int)MessageBox.Show(str1 + "\n" + str3 + "\n" + str2);
+            this.BadgeTextBox.Text = str1;
+            this.ContactTextBox.Text = str2;
+            this.LocationTextBox.Text = str3;
+            this.RichTextBox.Clear();
+        }
+
+        // SendKey every 300,000 ms (5 minutes) to [prevent solar sleep
+        public void StopSleep_Tick(object sender, EventArgs e)
+        {
+            SendKeys.Send("activated...");
+        }
+
+        // Tack on D in the front of 5 digit badge id
+        public void AutoBadge_Tick(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(BadgeTextBox.Text))
+            {
+                ;
+            }
+            else if (BadgeTextBox.Text.Length == 5)
+            {
+                string id = "d" + BadgeTextBox.Text;
+                BadgeTextBox.Text = id;
+            }
+        }
+
+        public void LogMeInLinkTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Clipboard.SetText("Please open: " + LogMeInLinkTextBox.Text + ", download & run the .exe file. Also approve or press okay to any window that pops up.");
+                MessageBox.Show("Copied to clipboard!", "Success");
+            }
+        }
+
+        // convert email address to name
+        public void BadgeTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.N)
+            {
+                try
+                {
+                    string name = BadgeTextBox.Text;
+                    string[] s = name.Split(' ');
+                    string fname = s[0];
+                    string lname = s[1];
+                    if (s.Length > 2)
+                    {
+                        MessageBox.Show("Only 2 words accepted as input!", "String Parsing Error");
+                    }
+                    else
+                    {
+                        var date = DateTime.Now.ToString("dd/MM/yyyy");
+
+                        // convert / to -
+                        var date_new = date.Replace('/', '-');
+
+                        string nhcar = "NHCAR_" + lname + "_" + fname + "(" + date_new.ToString() + ")";
+                        Clipboard.SetText(nhcar);
+                        BadgeTextBox.Clear();
+                        MessageBox.Show("Copied to clipboard", "Success!");
+                    }
+
+                }
+                catch (Exception)
+                {
+                    ;
+                }
+            }
+        }
+
+        public void ContactTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.E)
+            {
+                string email_new = string.Empty;
+                string email = ContactTextBox.Text;
+                try
+                {
+                    for (int i = 0; i < email.Length; i++)
+                    {
+                        if (email[i] != '<')
+                        {
+                            email_new += email[i];
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    email_new = email_new.Remove(email_new.Length - 1, 1);
+                    Clipboard.SetText(email_new);
+                    MessageBox.Show("Copied to Clipboard!", "Success!");
+                    ContactTextBox.Clear();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong...", "Error");
+                }
+            }
+        }
+
+        public void GuideTool_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("EMAIL TOOL: CTRL + E on Contacts Text Box\n\nNHCAR TOOL: CTRL + N on Badge Text Box\n\nFOLLOW UP: CTRL + F on Main Window\n\nRESOLUTION: CTRL + R on Main Window");
+        }
+    }
+}
